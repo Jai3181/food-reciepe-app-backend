@@ -13,6 +13,10 @@ const foodSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  reciepe: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true

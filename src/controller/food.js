@@ -2,27 +2,23 @@ const Food = require("../models/food")
 
 exports.createDish = (req, res) => {
   console.log("reqqqqqqqqqqq", req.files)
-  const { dishName, description, category, time_required, ingridiants } = req.body
+  const { dishName, description, category, time_required, ingridiants, reciepe } = req.body
+  // console.log(ingridiants, JSON.parse(ingridiants))
   let foodPictures = []
-  // if (req.files.length > 0) {
-  //   foodPictures = req.files.map(file => {
-  //     return { img: file.filename }
-  //   })
-  // }
   if (req.files.length > 0) {
     foodPictures = req.files.map(file => {
-      console.log("file:", file)
       return { img: process.env.APP_API + "/public/" + file.filename }
     })
   }
-  console.log("foodPictures", foodPictures)
+  // console.log("foodPictures", foodPictures)
 
   const food = new Food({
     dishName,
     description,
+    reciepe,
     category,
     time_required,
-    ingridiants,
+    ingridiants: JSON.parse(ingridiants),
     foodPictures,
     createdBy: req.user._id
   })
